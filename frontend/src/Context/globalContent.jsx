@@ -55,8 +55,20 @@ export const GlobalProvider = ({ children }) => {
 		}
 	};
 
+	const totalIncome = incomes.reduce((acc, curr) => {
+		return acc + curr.amount;
+	}, 0);
+
 	return (
-		<GlobalContext.Provider value={{ addIncome, getIncomes, incomes, deleteIncome }}>
+		<GlobalContext.Provider
+			value={{
+				addIncome,
+				getIncomes,
+				incomes,
+				deleteIncome,
+				totalIncome,
+			}}
+		>
 			{children}
 		</GlobalContext.Provider>
 	);
