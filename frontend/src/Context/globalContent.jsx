@@ -20,11 +20,10 @@ export const GlobalProvider = ({ children }) => {
 
 	const addIncome = async (income) => {
 		try {
-			console.log(income);
 			const res = await axios.post(`${base_url}add-income`, income);
+			console.log(res.data);
 			setIncomes((prevIncomes) => {
-				console.log(res)
-				return [...prevIncomes, res];
+				return [...prevIncomes, res.data];
 			});
 		} catch (error) {
 			console.log(error);
@@ -32,8 +31,19 @@ export const GlobalProvider = ({ children }) => {
 		}
 	};
 
+	const getIncomes = async () => {
+		try {
+			const res = await axios.get(`${base_url}get-incomes`);
+			console.log(res.data);
+			setIncomes(res.data);
+		} catch (error) {
+			console.log(error);
+			setError(error);
+		}
+	};
+
 	return (
-		<GlobalContext.Provider value={{ addIncome }}>
+		<GlobalContext.Provider value={{ addIncome, getIncomes, incomes }}>
 			{children}
 		</GlobalContext.Provider>
 	);
