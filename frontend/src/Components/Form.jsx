@@ -5,6 +5,7 @@ import { useGlobalContext } from "../Context/globalContent";
 
 function Form() {
 	const { addIncome, getIncomes, error, setError } = useGlobalContext();
+	// console.log('addIncome: ', addIncome);
 	const [inputState, setInputState] = useState({
 		title: "",
 		amount: "",
@@ -30,7 +31,7 @@ function Form() {
 			description: "",
 		});
 	};
-    console.log(title, amount, date, category, description)
+	// console.log(title, amount, date, category, description);
 
 	return (
 		<form onSubmit={handleSubmit}>
@@ -93,15 +94,21 @@ function Form() {
 					className="form-control"
 					name="description"
 					value={description}
-					placeholder="Add A Reference"
+					placeholder="Add A Description"
 					id="description"
 					cols="30"
 					rows="4"
 					onChange={handleInput("description")}
 				></textarea>
 			</div>
-			<div className="mb-3 btn btn-primary" name={"Add Income"}>
-				Submit
+			<div className="mb-3">
+				<button
+					type="submit"
+					className="btn btn-primary"
+					onClick={addIncome}
+				>
+					Submit
+				</button>
 			</div>
 		</form>
 	);

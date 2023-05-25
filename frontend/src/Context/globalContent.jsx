@@ -22,7 +22,10 @@ export const GlobalProvider = ({ children }) => {
 		try {
 			console.log(income);
 			const res = await axios.post(`${base_url}add-income`, income);
-			setIncomes([...incomes, res.data]);
+			setIncomes((prevIncomes) => {
+				console.log(res)
+				return [...prevIncomes, res];
+			});
 		} catch (error) {
 			console.log(error);
 			setError(error);
@@ -30,7 +33,7 @@ export const GlobalProvider = ({ children }) => {
 	};
 
 	return (
-		<GlobalContext.Provider value={addIncome}>
+		<GlobalContext.Provider value={{ addIncome }}>
 			{children}
 		</GlobalContext.Provider>
 	);
