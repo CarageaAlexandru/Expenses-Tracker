@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../Context/globalContent";
 import Form from "./Form";
+import { FaPoundSign } from "react-icons/fa";
+import { dateFormat } from "../Utils/dateFormat";
 
 const Incomes = () => {
-	const { addIncome, incomes, getIncomes, deleteIncome, totalIncome } =
+	const { incomes, getIncomes, deleteIncome, totalIncome } =
 		useGlobalContext();
 
 	useEffect(() => {
@@ -18,7 +20,9 @@ const Incomes = () => {
 				</div>
 				<div className="col">
 					<div>
-						<h3>Total Income: {totalIncome}</h3>
+						<h3>
+							Total Income: {<FaPoundSign />} {totalIncome}
+						</h3>
 						<div className="row row-cols-1 row-cols-md-2 g-4">
 							{incomes.map((income) => {
 								const {
@@ -40,9 +44,10 @@ const Incomes = () => {
 													{title}
 												</h5>
 												<p className="card-text">
-													Amount: {amount}
+													Amount:
+													{amount}
 													<br />
-													Date: {date}
+													Date: {dateFormat(date)}
 													<br />
 													Category: {category}
 													<br />

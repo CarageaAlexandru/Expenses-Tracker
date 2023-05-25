@@ -46,8 +46,8 @@ export const GlobalProvider = ({ children }) => {
 		try {
 			const res = await axios.delete(`${base_url}delete-income/${id}`);
 			console.log(res.data);
-			setIncomes((prevIncomes) => {
-				return prevIncomes.filter((income) => income._id !== id);
+			setExpenses((prevExpenses) => {
+				return prevExpenses.filter((expenses) => expense._id !== id);
 			});
 		} catch (error) {
 			console.log(error);
@@ -59,6 +59,49 @@ export const GlobalProvider = ({ children }) => {
 		return acc + curr.amount;
 	}, 0);
 
+	// EXPENSES
+
+	const addExpense = async (expense) => {
+		try {
+			const res = await axios.post(`${base_url}add-expense`, expense);
+			console.log(res.data);
+			setExpenses((prevExpenses) => {
+				return [...prevExpenses, res.data];
+			});
+		} catch (error) {
+			console.log(error);
+			setError(error);
+		}
+	};
+
+	const getExpenses = async () => {
+		try {
+			const res = await axios.get(`${base_url}get-expenses`);
+			console.log(res.data);
+			setExpenses(res.data);
+		} catch (error) {
+			console.log(error);
+			setError(error);
+		}
+	};
+
+	const deleteExpense = async (id) => {
+		try {
+			const res = await axios.delete(`${base_url}delete-expense/${id}`);
+			console.log(res.data);
+			setIncomes((prevIncomes) => {
+				return prevIncomes.filter((income) => income._id !== id);
+			});
+		} catch (error) {
+			console.log(error);
+			setError(error);
+		}
+	};
+
+	const totalExpenses = expenses.reduce((acc, curr) => {
+		return acc + curr.amount;
+	}, 0);
+
 	return (
 		<GlobalContext.Provider
 			value={{
@@ -67,6 +110,11 @@ export const GlobalProvider = ({ children }) => {
 				incomes,
 				deleteIncome,
 				totalIncome,
+				addExpense,
+				getExpenses,
+				expenses,
+				deleteExpense,
+				totalExpenses,
 			}}
 		>
 			{children}
