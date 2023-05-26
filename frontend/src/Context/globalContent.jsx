@@ -9,7 +9,7 @@ import axios from "axios";
 // router.post("/add-expense", addExpense);
 // router.delete("/delete-expense/:id", deleteExpense);
 
-const base_url = "http://localhost:3000/api/";
+const base_url = "https://expenses-tracker-nine-iota.vercel.app/";
 
 const GlobalContext = React.createContext();
 
