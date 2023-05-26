@@ -24,6 +24,7 @@ function Form() {
 		e.preventDefault();
 		try {
 			await addIncome(inputState);
+			// reset the state of the form after adding income
 			setInputState({
 				title: "",
 				amount: "",
@@ -45,7 +46,7 @@ function Form() {
 	// console.log(title, amount, date, category, description);
 
 	return (
-		<div className="container-sm mt-5">
+		<div className="container mt-5">
 			<form onSubmit={handleSubmit}>
 				{error && <p className="error">{error}</p>}
 				<div className="mb-3">
@@ -56,6 +57,7 @@ function Form() {
 						name="title"
 						placeholder="Salary Title"
 						onChange={handleInput("title")}
+						required
 					/>
 				</div>
 				<div className="mb-3">
@@ -66,6 +68,7 @@ function Form() {
 						name="amount"
 						placeholder="Salary Amount"
 						onChange={handleInput("amount")}
+						required
 					/>
 				</div>
 				<div className="mb-3">
@@ -77,6 +80,7 @@ function Form() {
 						onChange={(date) => {
 							setInputState({ ...inputState, date: date });
 						}}
+						required
 					/>
 				</div>
 				<div className="mb-3">
@@ -111,6 +115,7 @@ function Form() {
 						cols="30"
 						rows="4"
 						onChange={handleInput("description")}
+						required
 					></textarea>
 				</div>
 				<div className="mb-3">

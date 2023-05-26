@@ -1,4 +1,3 @@
-import { FaBeer } from "react-icons/fa";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { GrTransaction } from "react-icons/gr";
 import { GiReceiveMoney } from "react-icons/gi";

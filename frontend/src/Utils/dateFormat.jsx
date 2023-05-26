@@ -2,7 +2,7 @@
 export const dateFormat = (date) => {
 	return new Date(date).toLocaleDateString("en-GB", {
 		day: "numeric",
-		month: "short",
+		month: "numeric",
 		year: "numeric",
 	});
 };

@@ -40,11 +40,10 @@ const NavMenu = ({ active, setActive, switchViews }) => {
 						<span>Sign Out</span>
 					</div>
 				</div>
-				<div className="col-12 col-md-9 bg-secondary">
+				<div className="col-12 col-md-9 bg-white">
 					{switchViews()}
 				</div>
 			</div>
-			<div className="row vh-50"></div>
 		</div>
 	);
 };

@@ -7,10 +7,22 @@ import { dateFormat } from "../Utils/dateFormat";
 const Incomes = () => {
 	const { incomes, getIncomes, deleteIncome, totalIncome } =
 		useGlobalContext();
+	const [incomeList, setIncomeList] = useState([]);
 
 	useEffect(() => {
 		getIncomes();
 	}, []);
+
+	useEffect(() => {
+		setIncomeList(incomes);
+	}, [incomes]);
+
+	const handleDeleteIncome = (incomeId) => {
+		deleteIncome(incomeId);
+		setIncomeList((prevIncomeList) =>
+			prevIncomeList.filter((income) => income._id !== incomeId)
+		);
+	};
 
 	return (
 		<div className="container text-center">
@@ -19,12 +31,12 @@ const Incomes = () => {
 					<Form />
 				</div>
 				<div className="col">
-					<div>
+					<div className="container mt-5">
 						<h3>
 							Total Income: {<FaPoundSign />} {totalIncome}
 						</h3>
-						<div className="row row-cols-1 row-cols-md-2 g-4">
-							{incomes.map((income) => {
+						<div className="row row-cols-1 row-cols-md-2 g-4 mt-2">
+							{incomeList.map((income) => {
 								const {
 									_id,
 									title,
@@ -33,9 +45,6 @@ const Incomes = () => {
 									category,
 									description,
 								} = income;
-								{
-									/* const formatedDate = date.split('T')[0]; */
-								}
 								return (
 									<div className="col" key={_id}>
 										<div className="card">
@@ -44,19 +53,23 @@ const Incomes = () => {
 													{title}
 												</h5>
 												<p className="card-text">
-													Amount:
-													{amount}
-													<br />
-													Date: {dateFormat(date)}
-													<br />
-													Category: {category}
-													<br />
-													Description: {description}
+													<strong>Amount:</strong>{" "}
+													{amount} <br />
+													<strong>Date:</strong>{" "}
+													{dateFormat(date)} <br />
+													<strong>
+														Category:
+													</strong>{" "}
+													{category} <br />
+													<strong>
+														Description:
+													</strong>{" "}
+													{description}
 												</p>
 												<button
 													className="btn btn-danger"
 													onClick={() =>
-														deleteIncome(_id)
+														handleDeleteIncome(_id)
 													}
 												>
 													Delete

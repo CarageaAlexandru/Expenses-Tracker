@@ -47,7 +47,7 @@ export const GlobalProvider = ({ children }) => {
 			const res = await axios.delete(`${base_url}delete-income/${id}`);
 			console.log(res.data);
 			setExpenses((prevExpenses) => {
-				return prevExpenses.filter((expenses) => expense._id !== id);
+				return prevExpenses.filter((income) => income._id !== id);
 			});
 		} catch (error) {
 			console.log(error);
@@ -89,8 +89,8 @@ export const GlobalProvider = ({ children }) => {
 		try {
 			const res = await axios.delete(`${base_url}delete-expense/${id}`);
 			console.log(res.data);
-			setIncomes((prevIncomes) => {
-				return prevIncomes.filter((income) => income._id !== id);
+			setIncomes((prevExpenses) => {
+				return prevExpenses.filter((expense) => expense._id !== id);
 			});
 		} catch (error) {
 			console.log(error);
@@ -115,6 +115,7 @@ export const GlobalProvider = ({ children }) => {
 				expenses,
 				deleteExpense,
 				totalExpenses,
+				error
 			}}
 		>
 			{children}

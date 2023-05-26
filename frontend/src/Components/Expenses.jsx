@@ -4,15 +4,25 @@ import { FaPoundSign } from "react-icons/fa";
 import ExpenseForm from "./ExpenseForm";
 import { dateFormat } from "../Utils/dateFormat";
 
-
 const Expenses = () => {
 	const { expenses, getExpenses, deleteExpense, totalExpenses } =
 		useGlobalContext();
-	console.log("expenses: ", expenses);
+	const [expenseList, setExpenseList] = useState([]);
 
 	useEffect(() => {
 		getExpenses();
 	}, []);
+
+	useEffect(() => {
+		setExpenseList(expenses);
+	}, [expenses]);
+
+	const handleDeleteExpense = (expenseId) => {
+		deleteExpense(expenseId);
+		setExpenseList((prevExpenseList) =>
+			prevExpenseList.filter((expense) => expense._id !== expenseId)
+		);
+	};
 
 	return (
 		<div className="container text-center">
@@ -21,12 +31,12 @@ const Expenses = () => {
 					<ExpenseForm />
 				</div>
 				<div className="col">
-					<div>
+					<div className="container mt-5">
 						<h3>
 							Total Expenses: {<FaPoundSign />} {totalExpenses}
 						</h3>
-						<div className="row row-cols-1 row-cols-md-2 g-4">
-							{expenses.map((expense) => {
+						<div className="row row-cols-1 row-cols-md-2 g-4 mt-2">
+							{expenseList.map((expense) => {
 								const {
 									_id,
 									title,
@@ -35,7 +45,6 @@ const Expenses = () => {
 									category,
 									description,
 								} = expense;
-						
 								return (
 									<div className="col" key={_id}>
 										<div className="card">
@@ -44,19 +53,23 @@ const Expenses = () => {
 													{title}
 												</h5>
 												<p className="card-text">
-													Amount:
-													{amount}
-													<br />
-													Date: {dateFormat(date)}
-													<br />
-													Category: {category}
-													<br />
-													Description: {description}
+													<strong>Amount:</strong>{" "}
+													{amount} <br />
+													<strong>Date:</strong>{" "}
+													{dateFormat(date)} <br />
+													<strong>
+														Category:
+													</strong>{" "}
+													{category} <br />
+													<strong>
+														Description:
+													</strong>{" "}
+													{description}
 												</p>
 												<button
 													className="btn btn-danger"
 													onClick={() =>
-														deleteExpense(_id)
+														handleDeleteExpense(_id)
 													}
 												>
 													Delete

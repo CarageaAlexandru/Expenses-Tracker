@@ -3,7 +3,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGlobalContext } from "../Context/globalContent";
 
-
 function ExpenseForm() {
 	const { addExpense, getExpenses, error, setError } = useGlobalContext();
 	// console.log('addExpense: ', addExpense);
@@ -57,6 +56,7 @@ function ExpenseForm() {
 						name="title"
 						placeholder="Expense Title"
 						onChange={handleInput("title")}
+						required
 					/>
 				</div>
 				<div className="mb-3">
@@ -67,6 +67,7 @@ function ExpenseForm() {
 						name="amount"
 						placeholder="Expense Amount"
 						onChange={handleInput("amount")}
+						required
 					/>
 				</div>
 				<div className="mb-3">
@@ -78,6 +79,7 @@ function ExpenseForm() {
 						onChange={(date) => {
 							setInputState({ ...inputState, date: date });
 						}}
+						required
 					/>
 				</div>
 				<div className="mb-3">
@@ -112,6 +114,7 @@ function ExpenseForm() {
 						cols="30"
 						rows="4"
 						onChange={handleInput("description")}
+						required
 					></textarea>
 				</div>
 				<div className="mb-3">
