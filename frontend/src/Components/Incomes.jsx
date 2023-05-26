@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../Context/globalContent";
 import Form from "./Form";
-import { FaPoundSign } from "react-icons/fa";
 import { dateFormat } from "../Utils/dateFormat";
 
 const Incomes = () => {
@@ -33,7 +32,7 @@ const Incomes = () => {
 				<div className="col">
 					<div className="container mt-5">
 						<h3>
-							Total Income: {<FaPoundSign />} {totalIncome}
+							Total Income: {totalIncome} £
 						</h3>
 						<div className="row row-cols-1 row-cols-md-2 g-4 mt-2">
 							{incomeList.map((income) => {
@@ -54,7 +53,7 @@ const Incomes = () => {
 												</h5>
 												<p className="card-text">
 													<strong>Amount:</strong>{" "}
-													{amount} <br />
+													{amount} £ <br />
 													<strong>Date:</strong>{" "}
 													{dateFormat(date)} <br />
 													<strong>

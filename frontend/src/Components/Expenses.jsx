@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../Context/globalContent";
-import { FaPoundSign } from "react-icons/fa";
 import ExpenseForm from "./ExpenseForm";
 import { dateFormat } from "../Utils/dateFormat";
 
@@ -32,9 +31,7 @@ const Expenses = () => {
 				</div>
 				<div className="col">
 					<div className="container mt-5">
-						<h3>
-							Total Expenses: {<FaPoundSign />} {totalExpenses}
-						</h3>
+						<h3>Total Expenses: {totalExpenses} £</h3>
 						<div className="row row-cols-1 row-cols-md-2 g-4 mt-2">
 							{expenseList.map((expense) => {
 								const {
@@ -54,7 +51,7 @@ const Expenses = () => {
 												</h5>
 												<p className="card-text">
 													<strong>Amount:</strong>{" "}
-													{amount} <br />
+													{amount} £<br />
 													<strong>Date:</strong>{" "}
 													{dateFormat(date)} <br />
 													<strong>

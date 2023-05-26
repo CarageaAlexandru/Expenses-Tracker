@@ -1,9 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import avatar from "../assets/avatar.png";
 import { menuItems } from "../Utils/menu-items";
 import { GoSignOut } from "react-icons/go";
 
+import { useGlobalContext } from "../Context/globalContent";
+
 const NavMenu = ({ active, setActive, switchViews }) => {
+	const { incomes, expenses } = useGlobalContext();
+	const [money, setMoney] = useState(0);
+
+	const calculateMoney = () => {
+		const totalIncomes = incomes.reduce(
+			(acc, income) => acc + income.amount,
+			0
+		);
+		const totalExpenses = expenses.reduce(
+			(acc, expense) => acc + expense.amount,
+			0
+		);
+		setMoney(totalIncomes - totalExpenses);
+	};
+
+	useEffect(() => {
+		calculateMoney();
+	}, [incomes, expenses]);
 
 	return (
 		<div className="container-fluid vh-100 bg-light">
@@ -17,7 +37,10 @@ const NavMenu = ({ active, setActive, switchViews }) => {
 						/>
 						<div className="text">
 							<h2>Alex</h2>
-							<p>Money available</p>
+							<p>
+								Money available:{" "}
+								<span className="fw-bold">{money} £</span>{" "}
+							</p>{" "}
 						</div>
 					</div>
 					<ul className="list-unstyled flex-grow-1">
@@ -27,7 +50,9 @@ const NavMenu = ({ active, setActive, switchViews }) => {
 								<li
 									style={{ cursor: "pointer" }}
 									key={id}
-									className={`mb-3 ${active === id ? 'active' : ''}`}
+									className={`mb-3 ${
+										active === id ? "active" : ""
+									}`}
 									onClick={() => setActive(id)}
 								>
 									{icon} <span>{title}</span>
@@ -40,13 +65,10 @@ const NavMenu = ({ active, setActive, switchViews }) => {
 						<span>Sign Out</span>
 					</div>
 				</div>
-				<div className="col-12 col-md-9 bg-white">
-					{switchViews()}
-				</div>
+				<div className="col-12 col-md-9 bg-white">{switchViews()}</div>
 			</div>
 		</div>
 	);
 };
-
 
 export default NavMenu;
