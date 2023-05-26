@@ -11,6 +11,10 @@ const {
 
 const router = require("express").Router();
 
+router.get("/", (req, res) => {
+	res.send("Go to /api/get-incomes or /api/get-expenses");
+});
+
 router.get("/get-incomes", getIncomes);
 router.post("/add-income", addIncome);
 router.delete("/delete-income/:id", deleteIncome);
