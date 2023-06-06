@@ -16,7 +16,7 @@ const ExpenseSchema = new mongoose.Schema(
 		},
 		type: {
 			type: String,
-			default: "Income",
+			default: "Expense",
 		},
 		date: {
 			type: Date,
@@ -30,7 +30,7 @@ const ExpenseSchema = new mongoose.Schema(
 		},
 		description: {
 			type: String,
-			default: "Income",
+			default: "Expense",
 			maxLength: 20,
 			trim: true,
 		},
